@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MockTEst</title>
+    <script src="index.js">  </script>
+    <script> 
+    function validCheck()
+     {
+        var validc = true;
+            let cid = document.forms["customerForm"]["cusid"];
+    let ciderr = document.getElementById("ciderr");
+
+    let name = document.forms["customerForm"]["namein"];
+    let nameerr  = document.getElementById("nameerr")
+        
+    let email = document.forms["customerForm"]["email"];
+    let emailer  = document.getElementById("emailerr")
+       
+    let pamt = document.forms["customerForm"]["prinamt"];
+    let pamterr  = document.getElementById("priceerr")
+       
+    let roi = document.forms["customerForm"]["roi"];
+    let roierr  = document.getElementById("roierr")
+       
+    let noy = document.forms["customerForm"]["noy"];
+    let noyerr  = document.getElementById("noyerr")
+    let chobj = document.forms["customerForm"]["chk[]"];
+let chobjerr = document.getElementById("chkerr");
+    if(noyc(noy,noyerr) && roic(roi,roierr) &&  pamtc(pamt,pamterr))
+    {
+        var res = document.getElementById("mainres");
+        var tamount = document.getElementById("tamt");
+        let amount = pamt.value;
+        var si = noy.value * roi.value * pamt.value 
+        res.innerHTML  = "Simple Interest = " + si;
+        let total  = Number(si)+Number(amount);
+        tamount.innerHTML = "<br> Total Amount = " + total;
+    }
+
+    if(!idcheck(cid,ciderr) || !emailc(email,emailerr) || !namec(name,nameerr) || !pamtc(pamt,pamterr) 
+    || !roic(roi,roierr) ||  !noyc(noy,noyerr) || !checkmybox(chobj,chobjerr)){
+        validc = false;
+      console.log("ifcalled")
+}
+
+
+
+
+
+// checking the validting and then printing the values into the form 
+if(validc == true)
+    {
+        
+        alert("validated");
+       
+
+        showval(cid.value,name.value,email.value,roi.value,noy.value,pamt.value,chobj)
+
+        function showval(cid,name,email,roi,noy,pamt,chobj)
+        {
+            var showlabel = document.getElementById("showvalues")
+            var hobb = "";
+            for(i=0; i<chobj.length; i++)
+            {
+                if(chobj[i].checked)
+                {
+                    hobb+= chobj[i].value + " " ;
+                }
+            }
+
+            showlabel.innerHTML = `Customer id = ${cid} <br>
+                Name = ${name} <br>
+                email = ${email} <br>
+                rate of interest = ${roi} <br>
+                no of the years = ${noy} <br>
+                payment amount = ${pamt} <br>
+                hobbbies = ${hobb}<br>
+            `
+
+        }
+        return false;
+    }else 
+    return false;
+
+}
+
+
+    </script>
+</head>
+<body>
+    <h2> Mock Test </h2>
+    <form name="customerForm" method="post" action="new.html" onsubmit="return validCheck()">
+        Enter the customer id : <input name="cusid"  oninput="validCheck()"/> <span id="ciderr" style="color:red"> </span>
+        <br/>
+        Enter the name : <input name="namein" oninput="validCheck()"> <span id="nameerr" style="color:red"> </span>
+        <br/>
+        Enter the email : <input name="email" oninput="validCheck()"> <span id="emailerr" style="color:red"> </span>
+        <br/>
+        Enter the Principle Amount : <input name="prinamt" oninput="validCheck()"><span id="priceerr" style="color:red"> </span>
+        <br/>
+        Rate of Interest : <input name="roi" oninput="validCheck()"> <span id="roierr" style="color:red"> </span>
+        <br/>
+        Number of year : <input name="noy" oninput="validCheck()"> <span id="noyerr" style="color:red"> </span>
+        <br/>
+        Please Choose Your Hoobies : <input name="chk[]" type="checkbox" value="gaming">Gaming
+                <input type="checkbox" name="chk[]" value="Programming"> Programming
+                <input type="checkbox" name="chk[]" value="Instagram"> Instagram 
+                <span id="chkerr" style="color:red"> </span> 
+                <br/>
+        <div>
+            <span id="mainres">
+
+            </span>
+            <span id="tamt">
+
+            </span>
+        </div>
+        <button value="submit"> SUBMIT </button>
+    </form>
+    <hr>
+    <div id="showvalues"> 
+
+    </div>
+   
+    
+</body>
+</html>
